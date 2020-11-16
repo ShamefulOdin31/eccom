@@ -1,0 +1,2 @@
+class OrderGame < ApplicationRecord
+end

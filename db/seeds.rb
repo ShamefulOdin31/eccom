@@ -32,7 +32,7 @@ for i in 0..100
     name = Faker::Game.title
     new_game = rand_cat.games.create(
         :name => name,
-        :image => Faker::LoremFlickr.image(search_terms: [name]),
+        :image => Faker::LoremFlickr.image(size: "100x120", search_terms: [name]),
         :price => Faker::Number.between(from: 20, to: 80)
     )
     new_game.save

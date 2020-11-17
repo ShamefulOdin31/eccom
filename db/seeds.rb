@@ -9,3 +9,4 @@ AdminUser.create!(email: 'admin@example.com', password: 'password', password_con
 
 require 'faker'
 
+Order.destroy_all

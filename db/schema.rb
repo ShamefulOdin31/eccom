@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_16_150440) do
+ActiveRecord::Schema.define(version: 2020_11_17_193222) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2020_11_16_150440) do
 
   create_table "games", force: :cascade do |t|
     t.string "name"
-    t.integer "cat_id"
+    t.integer "category_id"
     t.string "image"
     t.decimal "price"
     t.datetime "created_at", precision: 6, null: false

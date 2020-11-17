@@ -1,0 +1,19 @@
+<div class="container">
+    <h1>Welcome!</h1>
+    
+        <% @games.each do |game| %>
+            
+                <div class="row">
+                    <div class="col">
+                        <%= image_tag  game.image %>
+                    </div>
+                    <div class="col">
+                        <h3><%= link_to game.name, home_show_path(:id => game.id) %></h3>
+                        <h6><%= game.price %></h6>
+                    </div>
+                </div>
+            <br>
+        <% end %>
+    
+
+</div>

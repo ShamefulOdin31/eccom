@@ -5,8 +5,35 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+#AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
 require 'faker'
 
-Order.destroy_all
+
+Category.destroy_all
+Category.reset_pk_sequence
+Game.destroy_all
+Game.reset_pk_sequence
+
+
+for i in 0..4
+    new_cat = Category.find_or_create_by(name: Faker::Game.genre)
+    new_cat.save
+end
+
+
+
+
+
+for i in 0..100
+    cat_count = Category.count
+    randomNum = rand(cat_count)
+    rand_cat = Category.offset(randomNum).first
+    name = Faker::Game.title
+    new_game = rand_cat.games.create(
+        :name => name,
+        :image => Faker::LoremFlickr.image(search_terms: [name]),
+        :price => Faker::Number.between(from: 20, to: 80)
+    )
+    new_game.save
+end

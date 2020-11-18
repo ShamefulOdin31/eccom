@@ -1,6 +1,17 @@
 <div class="container">
     <h1>Welcome!</h1>
-    
+    <%= form_tag searchResults_path do %>
+        <%= text_field_tag :keywords %>
+        <%= select_tag :selector, options_for_select(
+            [
+                ['Name', 1], 
+                ['Category', 2]
+            ]
+        ) %>
+        
+        <%= submit_tag 'Search' %>
+    <% end %>
+    <br>
         <% @games.each do |game| %>
             
                 <div class="row">

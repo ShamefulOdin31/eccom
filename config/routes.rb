@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   resources :home
 
+  get "search" => "home#search", :as => "search"
+  post "searchResults" => "home#search", :as => "searchResults"
 
   root to: "home#index"
 end

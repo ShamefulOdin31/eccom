@@ -1,6 +1,6 @@
 class ShoppingController < ApplicationController
   def index
-    @cart = 
+    @cart = session[:cart]
   end
 
   def show

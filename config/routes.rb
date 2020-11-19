@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   get "search" => "home#search", :as => "search"
   post "searchResults" => "home#search", :as => "searchResults"
-
+  post "add" => "home#add", :as => "add"
   root to: "home#index"
+  get "categories" => "home#categories", :as => "categories"
+  get "category" => "home#category", :as => "category"
 end

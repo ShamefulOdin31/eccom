@@ -1,0 +1,11 @@
+<br>
+<div class="container">
+<% @cat.each do |cat| %>
+    <div class="row">
+        <div class="col">
+            <h3><%= link_to cat.name, category_path(:id => cat.id) %></h3>
+        </div>
+    </div>
+        <br>
+<% end %>
+</div>

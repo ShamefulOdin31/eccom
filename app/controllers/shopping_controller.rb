@@ -1,6 +1,19 @@
 class ShoppingController < ApplicationController
   def index
     @cart = session[:cart]
+    @products = []
+    @cart.each do |cart|
+      total = cart['game']['price'].to_i * cart['qty'].to_i
+
+      new_product = { "game" => cart['game'], "qty" => cart['qty'], "total" => total }
+      @products.push(new_product)
+    end
+
+
+    
+
+    
+
   end
 
   def show

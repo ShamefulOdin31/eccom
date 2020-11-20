@@ -20,7 +20,7 @@
                 </div>
                 <div class="col">
                     <h3><%= link_to game.name, home_show_path(:id => game.id) %></h3>
-                    <h6><%= game.price %></h6>
+                    <h6>$<%= game.price %>0</h6>
                     <%= button_to "Add to Cart", add_path(id: game.id) %>
                 </div>
             </div>

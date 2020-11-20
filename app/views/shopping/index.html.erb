@@ -3,8 +3,23 @@
         <br>
         <h3>Shopping cart is empty</h3>
     <% else %>
-        <% @cart.each do |cart| %>
-            
+    <br>
+        <% @products.each do |products| %>
+            <div class="row">
+                <div class="col">
+                    <%= image_tag  products['game']['image'] %>
+                </div>
+                <div class="col">
+                    <h3><%= link_to products['game']['name'], home_show_path(:id => products['game']['id']) %></h3>
+                    <h6>$<%= products['total'] %></h6>
+
+                    <%= form_tag searchResults_path, :class => "form-inline" do %>
+                        <%= text_field_tag :keywords, products['qty'], class: "form-control" %>
+                        <%= submit_tag 'Update', class: "btn btn-primary mb-2" %>
+                    <% end %>
+                </div>
+            </div>
+            <br>
         <% end %>
     <% end %>
 </div>

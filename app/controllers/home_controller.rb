@@ -6,15 +6,36 @@ class HomeController < ApplicationController
   def add
     if session[:cart]
       cart = session[:cart]
-      cart.push(params[:id])
+
+      found = false
+      item_id = nil
+      item_qty = nil
+      item_index = nil
+
+      cart.each_with_index do |item, index|
+        if item['game']["id"].to_i == params[:id].to_i
+          found = true
+          item_id = item['game']
+          item_qty = item['qty'] + 1
+          item_index = index
+        end
+      end
+
+      if found
+        newValue = {"game" => item_id, "qty" => item_qty}
+        cart.delete_at(item_index)
+        cart.push(newValue)
+      else
+        newValue = {"game" => Game.find(params[:id]), "qty" => 1}
+        cart.push(newValue)
+      end
       session[:cart] = cart
     else
       session[:cart] = []
       cart = session[:cart]
-      cart.push(params[:id])
+      cart.push({"game" => Game.find(params[:id]), "qty" => 1})
       session[:cart] = cart
     end
-
     puts session[:cart]
   end
 

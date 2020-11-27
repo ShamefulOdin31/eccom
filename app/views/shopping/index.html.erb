@@ -13,7 +13,7 @@
                     <h3><%= link_to products['game']['name'], home_show_path(:id => products['game']['id']) %></h3>
                     <h6>$<%= products['total'] %></h6>
 
-                    <%= form_tag searchResults_path, :class => "form-inline" do %>
+                    <%= form_tag updatecart_path, :class => "form-inline" do %>
                         <%= text_field_tag :keywords, products['qty'], class: "form-control" %>
                         <%= submit_tag 'Update', class: "btn btn-primary mb-2" %>
                     <% end %>

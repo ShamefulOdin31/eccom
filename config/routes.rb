@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   root to: "home#index"
   get "categories" => "home#categories", :as => "categories"
   get "category" => "home#category", :as => "category"
+
+  post "updatecart" => "shopping#update", :as => "updatecart"
 end

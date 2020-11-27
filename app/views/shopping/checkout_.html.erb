@@ -29,6 +29,12 @@
             </div>
         <% end %>
         <br>
-        <b>Total: $<%= @total %>.00</b>
+        <b>Subtotal: $<%= @total %>.00</b>
+        <br>
+        <b>GST: $<%= @gst %></b>
+        <br>
+        <b>PST: $<%= @pst %></b>
+        <br>
+        <b>Total: $<%= @total + @gst + @pst %></b>
     <% end %>
 </div>

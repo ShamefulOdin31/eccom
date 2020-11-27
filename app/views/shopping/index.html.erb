@@ -7,7 +7,7 @@
         <% @products.each do |products| %>
             <div class="row">
                 <div class="col">
-                    <%= image_tag  products['game']['image'] %>
+                    <%= image_tag  products['game']['image'], alt: products['game']['name'] %>
                 </div>
                 <div class="col">
                     <h3><%= link_to products['game']['name'], home_show_path(:id => products['game']['id']) %></h3>
@@ -25,6 +25,27 @@
             <br>
         <% end %>
 
-        <%= link_to "Checkout", checkout_path %>
+        <%= form_tag checkout_path, :class => "form" do %>
+            <%= select_tag :selector, options_for_select(
+                [
+                    ['Alberta', 'Alberta'], 
+                    ['British Columbia', 'British Columbia'],
+                    ['Manitoba', 'Manitoba'],
+                    ['New Brunswick', 'New Brunswick'],
+                    ['Newfoundland and Labrador', 'Newfoundland and Labrador'],
+                    ['Northwest Territories', 'Northwest Territories'],
+                    ['Nova Scotia', 'Nova Scotia'],
+                    ['Nunavut', 'Nunavut'],
+                    ['Ontario', 'Ontario'],
+                    ['Prince Edward Island', 'Prince Edward Island'],
+                    ['Quebec', 'Quebec'],
+                    ['Saskatchewan', 'Saskatchewan'],
+                    ['Yukon', 'Yukon'],
+                ]
+            ) %>
+            
+            <%= submit_tag 'Checkout', class: "btn btn-primary mb-2" %>
+        <% end %>
+
     <% end %>
 </div>

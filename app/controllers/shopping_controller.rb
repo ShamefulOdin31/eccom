@@ -38,7 +38,7 @@ class ShoppingController < ApplicationController
     end
     session[:cart] = cart
     redirect_to shopping_index_path
-    puts session[:cart]
+    #puts session[:cart]
   end
 
   def remove
@@ -62,11 +62,55 @@ class ShoppingController < ApplicationController
   end
 
   def checkout
+    session[:province] = params[:selector]
+    redirect_to checkout__path
+  end
+
+  def checkout_
     @cart = session[:cart]
     @total = 0
     @cart.each_with_index do |item, index|
       @total = @total + item['game']['price'].to_i * item['qty'].to_i
     end
+
+    province = session[:province]
+
+    pst_amount = 0;
+
+    if province == "Alberta"
+      pst_amount = 0.00
+    elsif province == "British Columbia"
+      pst_amount = 0.07
+    elsif province == "Manitoba"
+      pst_amount = 0.07
+    elsif province == "New Brunswick"
+      pst_amount = 0.10
+    elsif province == "Newfoundland and Labrador"
+      pst_amount = 0.10
+    elsif province == "Northwest Territories"
+      pst_amount = 0.00
+    elsif province == "Nova Scotia"
+      pst_amount = 0.10
+    elsif province == "Nunavut"
+      pst_amount = 0.00
+    elsif province == "Ontario"
+      pst_amount = 0.08
+    elsif province == "Prince Edward Island"
+      pst_amount = 0.10
+    elsif province == "Quebec"
+      pst_amount = 0.09975
+    elsif province == "Saskatchewan"
+      pst_amount = 0.06
+    elsif province == "Yukon"
+      pst_amount = 0.00
+    end
+
+    @gst = (@total * 0.05).round(2)
+    @pst = (@total * pst_amount).round(2)
+  end
+
+  def final
+    
   end
 
   def show

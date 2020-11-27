@@ -30,9 +30,12 @@ for i in 0..100
     randomNum = rand(cat_count)
     rand_cat = Category.offset(randomNum).first
     name = Faker::Game.title
+
+    search = name.gsub! ' ', '_'
+
     new_game = rand_cat.games.create(
         :name => name,
-        :image => Faker::LoremFlickr.image(size: "100x120", search_terms: [name]),
+        :image => Faker::LoremFlickr.image(size: "100x120", search_terms: [search]),
         :price => Faker::Number.between(from: 20, to: 80)
     )
     new_game.save

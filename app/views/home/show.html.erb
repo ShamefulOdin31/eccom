@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class=col>
-            <%= image_tag @game.image %>
+            <%= image_tag @game.image, alt: @game.name %>
         </div>
         <div class=col>
             <h3><%= @game.name %></h3>

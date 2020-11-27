@@ -21,7 +21,8 @@ Rails.application.routes.draw do
 
   post "updatecart" => "shopping#update", :as => "updatecart"
 
-  get "checkout" => "shopping#checkout", :as => "checkout"
+  post "checkout" => "shopping#checkout", :as => "checkout"
+  get "checkout_" => "shopping#checkout_", :as => "checkout_"
 
   post "remove_from_cart" => "shopping#remove", :as => "remove_from_cart"
 end

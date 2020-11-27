@@ -142,6 +142,8 @@ class ShoppingController < ApplicationController
 
     session[:total] = nil
     session[:cart] = nil
+
+    @order = new_order
   end
 
   def show

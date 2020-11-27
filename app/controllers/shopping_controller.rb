@@ -63,14 +63,15 @@ class ShoppingController < ApplicationController
 
   def checkout
     session[:province] = params[:selector]
+    session[:name] = params[:name]
     redirect_to checkout__path
   end
 
   def checkout_
     @cart = session[:cart]
-    @total = 0
+    @subtotal = 0
     @cart.each_with_index do |item, index|
-      @total = @total + item['game']['price'].to_i * item['qty'].to_i
+      @subtotal = @subtotal + item['game']['price'].to_i * item['qty'].to_i
     end
 
     province = session[:province]
@@ -105,12 +106,42 @@ class ShoppingController < ApplicationController
       pst_amount = 0.00
     end
 
-    @gst = (@total * 0.05).round(2)
-    @pst = (@total * pst_amount).round(2)
+    @gst = (@subtotal * 0.05).round(2)
+    @pst = (@subtotal * pst_amount).round(2)
+
+    @total = @subtotal + @gst + @pst
+
+    session[:total] = @total 
   end
 
   def final
+    total = session[:total]
+    cart = session[:cart]
+    name = session[:name]
+    province = session[:province]
+
+    time = Time.new
+
+    customer = Customer.find_or_create_by(name: name, address: province)
+    customer.save
+
+    new_order = Order.create(date: time.inspect ,status: 1, comments: "test order", customer_id: customer.id,)
+    new_order.save
+
     
+
+    cart.each do |n|
+      new_item = new_order.order_games.create(
+        :product_id => n['game']['name'],
+        :qty => n['qty'],
+        :order_price => (n['qty'].to_i * n['game']['price'].to_i)
+      )
+
+      new_item.save
+    end
+
+    session[:total] = nil
+    session[:cart] = nil
   end
 
   def show

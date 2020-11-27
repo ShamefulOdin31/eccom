@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   post "checkout" => "shopping#checkout", :as => "checkout"
   get "checkout_" => "shopping#checkout_", :as => "checkout_"
+  get "final" => "shopping#final", :as => "final"
 
   post "remove_from_cart" => "shopping#remove", :as => "remove_from_cart"
 end

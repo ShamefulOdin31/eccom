@@ -1,0 +1,34 @@
+<div class="container">
+    <% if @cart.nil? %>
+        <br>
+        <h3>Shopping cart is empty</h3>
+    <% else %>
+    <br>
+        <div class="row">
+            <div class="col">
+                <b>Name</b>
+            </div>
+            <div class="col">
+                <b>Amount</b>
+            </div>
+            <div class="col">
+                <b>Total</b>
+            </div>
+        </div>
+        <% @cart.each do |products| %>
+            <div class="row">
+                <div class="col">
+                    <%= products['game']['name'] %>
+                </div>
+                <div class="col">
+                    <%= products['qty']%>
+                </div>
+                <div class="col">
+                    $<%= products['qty'].to_i * products['game']['price'].to_i %>.00
+                </div>
+            </div>
+        <% end %>
+        <br>
+        <b>Total: $<%= @total %>.00</b>
+    <% end %>
+</div>

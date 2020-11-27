@@ -20,4 +20,8 @@ Rails.application.routes.draw do
   get "category" => "home#category", :as => "category"
 
   post "updatecart" => "shopping#update", :as => "updatecart"
+
+  get "checkout" => "shopping#checkout", :as => "checkout"
+
+  post "remove_from_cart" => "shopping#remove", :as => "remove_from_cart"
 end

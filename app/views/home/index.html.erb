@@ -1,15 +1,15 @@
 <div class="container">
     <h1>Welcome!</h1>
-    <%= form_tag searchResults_path do %>
-        <%= text_field_tag :keywords %>
+    <%= form_tag searchResults_path, class: "form-inline" do %>
+        <%= text_field_tag :keywords, "",class: "form-control"  %>
         <%= select_tag :selector, options_for_select(
             [
                 ['Name', 1], 
                 ['Category', 2]
             ]
-        ) %>
+        ), class: "form-control" %>
         
-        <%= submit_tag 'Search' %>
+        <%= submit_tag 'Search',  class: "btn btn-primary" %>
     <% end %>
     <br>
     <% @games.each do |game| %>
@@ -21,7 +21,7 @@
                 <div class="col">
                     <h3><%= link_to game.name, home_show_path(:id => game.id) %></h3>
                     <h6>$<%= game.price %>0</h6>
-                    <%= button_to "Add to Cart", add_path(id: game.id) %>
+                    <%= button_to "Add to Cart", add_path(id: game.id),  class: "btn btn-primary" %>
                 </div>
             </div>
         <br>

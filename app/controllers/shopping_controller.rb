@@ -6,9 +6,9 @@ class ShoppingController < ApplicationController
 
     else
       @cart.each do |cart|
-        total = cart['game']['price'].to_i * cart['qty'].to_i
+        total = cart["game"]["price"].to_i * cart["qty"].to_i
 
-        new_product = { "game" => cart['game'], "qty" => cart['qty'], "total" => total }
+        new_product = { "game" => cart["game"], "qty" => cart["qty"], "total" => total }
         @products.push(new_product)
       end
     end
@@ -23,12 +23,12 @@ class ShoppingController < ApplicationController
     item_index = nil
 
     cart.each_with_index do |item, index|
-      if item['game']["id"].to_i == params[:id].to_i
-        found = true
-        item_id = item['game']
-        item_qty = params[:keywords]
-        item_index = index
-      end
+      next unless item["game"]["id"].to_i == params[:id].to_i
+
+      found = true
+      item_id = item["game"]
+      item_qty = params[:keywords]
+      item_index = index
     end
 
     if found
@@ -38,7 +38,7 @@ class ShoppingController < ApplicationController
     end
     session[:cart] = cart
     redirect_to shopping_index_path
-    #puts session[:cart]
+    # puts session[:cart]
   end
 
   def remove
@@ -47,15 +47,13 @@ class ShoppingController < ApplicationController
     item_index = nil
 
     cart.each_with_index do |item, index|
-      if item['game']["id"].to_i == params[:id].to_i
+      if item["game"]["id"].to_i == params[:id].to_i
         found = true
         item_index = index
       end
     end
 
-    if found
-      cart.delete_at(item_index)
-    end
+    cart.delete_at(item_index) if found
 
     session[:cart] = cart
     redirect_to shopping_index_path
@@ -71,12 +69,12 @@ class ShoppingController < ApplicationController
     @cart = session[:cart]
     @subtotal = 0
     @cart.each_with_index do |item, index|
-      @subtotal = @subtotal + item['game']['price'].to_i * item['qty'].to_i
+      @subtotal += item["game"]["price"].to_i * item["qty"].to_i
     end
 
     province = session[:province]
 
-    pst_amount = 0;
+    pst_amount = 0
 
     if province == "Alberta"
       pst_amount = 0.00
@@ -111,7 +109,7 @@ class ShoppingController < ApplicationController
 
     @total = @subtotal + @gst + @pst
 
-    session[:total] = @total 
+    session[:total] = @total
   end
 
   def final
@@ -125,16 +123,14 @@ class ShoppingController < ApplicationController
     customer = Customer.find_or_create_by(name: name, address: province)
     customer.save
 
-    new_order = Order.create(date: time.inspect ,status: 1, comments: "test order", customer_id: customer.id,)
+    new_order = Order.create(date: time.inspect, status: 1, comments: "test order", customer_id: customer.id)
     new_order.save
-
-    
 
     cart.each do |n|
       new_item = new_order.order_games.create(
-        :product_id => n['game']['name'],
-        :qty => n['qty'],
-        :order_price => (n['qty'].to_i * n['game']['price'].to_i)
+        product_id:  n["game"]["name"],
+        qty:         n["qty"],
+        order_price: (n["qty"].to_i * n["game"]["price"].to_i)
       )
 
       new_item.save
@@ -146,7 +142,5 @@ class ShoppingController < ApplicationController
     @order = new_order
   end
 
-  def show
-
-  end
+  def show; end
 end

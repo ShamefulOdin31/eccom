@@ -1,5 +1,6 @@
 <br>
 <div class="container">
+<%= link_to "Categories",categories_path %> >> <%= link_to @cat.name ,category_path(:id => @cat.id) %>
 <h2><%= @cat.name %></h2>
 <br>
 <% @games.each do |game| %>

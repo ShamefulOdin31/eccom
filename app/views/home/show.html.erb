@@ -1,11 +1,13 @@
 <div class="container">
+<%= link_to "Categories",categories_path %> >> <%= link_to @cat.name ,category_path(:id => @cat.id) %> >> <%= link_to @game.name ,home_show_path(:id => @game.id) %>
     <div class="row">
         <div class=col>
             <%= image_tag @game.image, alt: @game.name %>
         </div>
         <div class=col>
             <h3><%= @game.name %></h3>
-            <h6><%= @game.price %></h6>
+            <h6>$<%= @game.price %>0</h6>
+            <%= button_to "Add to Cart", add_path(id: @game.id),  class: "btn btn-primary" %>
         </div>
     </div>
 </div>

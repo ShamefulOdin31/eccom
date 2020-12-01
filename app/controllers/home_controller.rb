@@ -41,6 +41,7 @@ class HomeController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    @cat = Category.find(@game.category_id)
   end
 
   def categories

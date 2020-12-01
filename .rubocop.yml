@@ -1,0 +1,17 @@
+es.
+Layout/HashAlignment:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
+
+# No auto-correct for unused block arguments,
+# but will still warn.
+Lint/UnusedBlockArgument:
+  AutoCorrect: false
+
+# No auto-correct for unused method arguments,
+# but will still warn.
+Lint/UnusedMethodArgument:
+  AutoCorrect: false
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
